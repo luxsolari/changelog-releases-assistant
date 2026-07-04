@@ -5,8 +5,17 @@
 A Claude Code plugin that bootstraps a repo's whole release discipline:
 init the repo, enforce Conventional Commits, derive semver bumps from
 commit history, and publish GitHub Releases straight from `CHANGELOG.md`.
-Named after Charlie Whiting, F1's longtime Race Director — famous for
-strictly enforcing the rulebook.
+
+Whiting is named after *[Charlie Whiting](https://en.wikipedia.org/wiki/Charlie_Whiting)*,
+the FIA's Race Director and Safety Delegate from 1997 until his death in
+2019 — the steward at the foot of every grid who enforced the rulebook
+race after race, and whose tenure was shaped by
+[the fatal 1994 San Marino Grand Prix weekend](https://en.wikipedia.org/wiki/1994_San_Marino_Grand_Prix),
+after which he helped drive the FIA's push for the stricter technical and
+safety regulations that still govern the sport today. This tool does the
+same for your repo: it enforces the rules — commit format, versioning,
+changelog discipline — so releases stop depending on anyone remembering
+to follow them by hand.
 
 ## What it does
 

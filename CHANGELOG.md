@@ -9,6 +9,8 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-07-04
+
 ### Added
 - `inspect` skill: read-only audit of an existing repo against whiting's conventions (changelog format, tag scheme, existing release automation, commit style, hook activation, AGENTS.md/CLAUDE.md, branch protection), with a concrete remediation plan pointing at `repo-init`, `commit-conventions`, or `semver-release`.
 - `repo-init` skill: bootstraps `LICENSE`, `README.md`, and a Keep a Changelog `CHANGELOG.md`, including `git init` for from-scratch repos.
@@ -27,4 +29,5 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `scripts/extract_changelog.py`: extracts a single version's section from a Keep a Changelog-formatted `CHANGELOG.md`, stripping the trailing reference-link line and `---` separator, for use as release notes.
 - This repo dogfoods its own automation: the workflow and script above are the exact files the skill copies into target repos.
 
+[0.2.0]: https://github.com/luxsolari/whiting/releases/tag/v0.2.0
 [0.1.0]: https://github.com/luxsolari/changelog-releases-assistant/releases/tag/v0.1.0

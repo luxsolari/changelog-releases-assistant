@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Suggest the next semver bump from Conventional Commits since the last tag."""
 import re
+import subprocess
+import sys
 
 COMMIT_TYPE_RE = re.compile(
     r"^(?P<type>feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)"
@@ -41,3 +43,49 @@ def next_version(current, bump):
     if bump == "patch":
         return f"v{major}.{minor}.{patch + 1}"
     raise ValueError(f"No release needed: bump={bump!r}")
+
+
+def last_tag():
+    result = subprocess.run(
+        ["git", "describe", "--tags", "--abbrev=0", "--match", "v*.*.*"],
+        capture_output=True, text=True,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip()
+
+
+def commits_since(tag):
+    rev_range = f"{tag}..HEAD" if tag else "HEAD"
+    subjects = subprocess.run(
+        ["git", "log", rev_range, "--format=%s"],
+        capture_output=True, text=True, check=True,
+    ).stdout.splitlines()
+    bodies = subprocess.run(
+        ["git", "log", rev_range, "--format=%B%x00"],
+        capture_output=True, text=True, check=True,
+    ).stdout.split("\x00")
+    return subjects, bodies
+
+
+def main():
+    tag = last_tag()
+    subjects, bodies = commits_since(tag)
+    if not subjects:
+        print(f"No commits since {tag or '(no tags yet)'} — nothing to release.")
+        return 1
+    bump = classify_bump(subjects, bodies)
+    if bump == "none":
+        print(f"No feat/fix/breaking commits since {tag or '(no tags yet)'} — no release needed.")
+        return 1
+    baseline = tag or "v0.0.0"
+    suggested = next_version(baseline, bump)
+    print(f"Last tag: {tag or '(none)'}")
+    print(f"Commits considered: {len(subjects)}")
+    print(f"Bump level: {bump}")
+    print(f"Suggested next version: {suggested}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

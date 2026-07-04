@@ -1,0 +1,14 @@
+{
+  "name": "changelog-releases-assistant",
+  "displayName": "Changelog Releases Assistant",
+  "version": "0.1.0",
+  "description": "Sets up GitHub Release automation driven by CHANGELOG.md: publishes a Release whenever a version tag is pushed, using the matching changelog section as the release body. Detects existing automation before touching anything.",
+  "author": {
+    "name": "Lux Solari",
+    "email": "luxsolari@outlook.com"
+  },
+  "homepage": "https://github.com/luxsolari/changelog-releases-assistant",
+  "repository": "https://github.com/luxsolari/changelog-releases-assistant",
+  "license": "MIT",
+  "keywords": ["github-releases", "changelog", "keep-a-changelog", "ci", "automation", "semver"]
+}

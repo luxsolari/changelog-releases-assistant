@@ -22,6 +22,11 @@ def main():
         print("Usage: render_template.py <template-file> [KEY=VALUE ...]", file=sys.stderr)
         return 1
     template_path = Path(sys.argv[1])
+    # Validate all arguments contain '=' before building mapping
+    for arg in sys.argv[2:]:
+        if "=" not in arg:
+            print("Usage: render_template.py <template-file> [KEY=VALUE ...]", file=sys.stderr)
+            return 1
     mapping = dict(arg.split("=", 1) for arg in sys.argv[2:])
     print(render(template_path.read_text(encoding="utf-8"), mapping), end="")
     return 0

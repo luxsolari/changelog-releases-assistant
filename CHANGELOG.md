@@ -9,6 +9,14 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+- `repo-init` now renders Version and License shields.io badges into the
+  generated `README.md` (new `REPO_SLUG` / `LICENSE_NAME` template
+  placeholders) and, when a GitHub remote and `gh` auth are available,
+  sets the repo description and topics via `gh repo edit`.
+- `inspect` now flags missing README badges (offline) and a missing
+  GitHub description or topics (best-effort, gh-gated).
+
 ## [0.2.0] — 2026-07-04
 
 ### Added

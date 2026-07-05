@@ -47,10 +47,13 @@ python3 $CLAUDE_PLUGIN_ROOT/scripts/render_template.py \
 For `README.md`, ask the user for the project name and a one-line
 description. Derive `REPO_SLUG` (`owner/repo`) from the remote —
 `git remote get-url origin`, taking the `owner/repo` out of the SSH or
-HTTPS GitHub URL; if there is no remote yet, ask the user for it. Set
-`LICENSE_NAME` to the license id (`MIT` by default; for another license
-use its SPDX id with hyphens doubled for the shields badge, e.g.
-`Apache--2.0`). Then render:
+HTTPS GitHub URL; if there is no remote yet, ask the user for it. Set `LICENSE_NAME` to the shields-escaped license id. For `MIT` it is
+just `MIT`; for any other license do not hand-escape — run the id
+through the helper so the badge label is always correct:
+
+    LICENSE_NAME=$(python3 $CLAUDE_PLUGIN_ROOT/scripts/shields_escape.py "Apache-2.0")  # -> Apache--2.0
+
+Then render:
 
 ```
 python3 $CLAUDE_PLUGIN_ROOT/scripts/render_template.py \

@@ -16,6 +16,7 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   sets the repo description and topics via `gh repo edit`.
 - `inspect` now flags missing README badges (offline) and a missing
   GitHub description or topics (best-effort, gh-gated).
+- `scripts/shields_escape.py` escapes the license id for the shields badge, so non-MIT SPDX ids (e.g. `Apache-2.0` → `Apache--2.0`) render correctly; `repo-init` runs it to compute `LICENSE_NAME`.
 
 ## [0.2.0] — 2026-07-04
 
